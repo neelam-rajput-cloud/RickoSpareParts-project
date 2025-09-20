@@ -27,11 +27,11 @@
         <div class="flex justify-between px-6 items-center">
           <div class="flex items-center">
             <span class="text-2xl font-bold text-blue-600"
-              >Hico Spare Parts</span
+              >Hico Spare Parts - Products</span
             >
           </div>
 
-          <form class="w-[500px]">
+          <!-- <form class="w-[500px]">
             <label
               for="default-search"
               class="mb-2 text-sm font-medium text-gray-900 sr-only"
@@ -61,7 +61,7 @@
                 Search
               </button>
             </div>
-          </form>
+          </form> -->
 
           <div class="flex items-center space-x-8 text-gray-700 w-[250px]">
             <div class="text-center">
@@ -70,13 +70,13 @@
             </div>
 
             <div class="space-x-6">
-              <button>
+              <!-- <button>
                 <img
-                  src="svg/search.svg"
+                  src="svg/user.svg"
                   class="w-4 h-4 text-gray-500"
                   alt="search"
                 />
-              </button>
+              </button> -->
               <button id="bucketBtn" class="relative">
                 <img src="svg/cart.svg" class="w-6 h-6" alt="cart" />
 
@@ -155,10 +155,10 @@
       </ul>
     </aside>
 
-    <main class="ml-64 p-8 flex-1">
-      <h1 id="all-products" class="text-5xl font-bold mb-6 mt-24 text-center">
+    <main class="ml-64 p-8 flex-1 mt-16">
+      <!-- <h1 id="all-products" class="text-5xl font-bold mb-6 mt-24 text-center">
         All Products
-      </h1>
+      </h1> -->
 
       <section id="products" class="p-8 space-y-12"></section>
     </main>
@@ -179,7 +179,10 @@
         </button>
 
         <!-- Product Image -->
-        <img id="modalImage" class="w-full h-52 object-cover rounded-lg mb-4" />
+        <img
+          id="modalImage"
+          class="w-full h-52 object-contain rounded-lg mb-4"
+        />
 
         <!-- Product Info -->
         <h2 id="modalName" class="text-2xl font-bold text-gray-800"></h2>

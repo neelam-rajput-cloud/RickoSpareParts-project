@@ -3,13 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const bucketModal = document.getElementById("bucketModal");
   const closeBucket = document.getElementById("closeBucket");
 
-  const checkoutBtn = document.getElementById("checkoutBtn");
-  const checkoutModal = document.getElementById("checkoutModal");
-  const closeCheckout = document.getElementById("closeCheckout");
-  const checkoutSummary = document.getElementById("checkout-summary");
-  const confirmOrder = document.getElementById("confirmOrder");
-
-  // --- Bucket modal open/close ---
   bucketBtn.addEventListener("click", () => {
     renderBucket();
     bucketModal.classList.remove("hidden");
@@ -28,100 +21,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- Checkout modal open ---
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", () => {
-      const bucket = JSON.parse(localStorage.getItem("bucket")) || [];
-      if (bucket.length === 0) {
-        alert("Your bucket is empty!");
-        return;
-      }
-
-      let total = 0;
-      checkoutSummary.innerHTML = "";
-      bucket.forEach((item) => {
-        total += item.price * item.quantity;
-        checkoutSummary.innerHTML += `<p>${item.name} x ${item.quantity} = Rs.${
-          item.price * item.quantity
-        }</p>`;
-      });
-      checkoutSummary.innerHTML += `<p class="font-bold mt-2">Total: Rs.${total}</p>`;
-
-      checkoutModal.classList.remove("hidden");
-      checkoutModal.classList.add("flex");
-    });
-  }
-
-  // --- Checkout modal close ---
-  closeCheckout.addEventListener("click", () => {
-    checkoutModal.classList.add("hidden");
-    checkoutModal.classList.remove("flex");
-  });
-
-  checkoutModal.addEventListener("click", (e) => {
-    if (e.target === checkoutModal) {
-      checkoutModal.classList.add("hidden");
-      checkoutModal.classList.remove("flex");
-    }
-  });
-
-  confirmOrder.addEventListener("click", () => {
-    const name = document.getElementById("userName").value.trim();
-    const contact = document.getElementById("userContact").value.trim();
-    const address = document.getElementById("userAddress").value.trim();
-
-    if (!name || !contact || !address) {
-      alert("Please enter your name, contact number, and address.");
-      return;
-    }
-
-    alert(
-      `Thank you ${name}! Your order has been placed.\nAddress: ${address}\nContact: ${contact}`
-    );
-
-    // Clear bucket
-    localStorage.removeItem("bucket");
-    renderBucket();
-    updateBucketCount();
-
-    // Close modals
-    checkoutModal.classList.add("hidden");
-    checkoutModal.classList.remove("flex");
-    bucketModal.classList.add("hidden");
-    bucketModal.classList.remove("flex");
-  });
-
-  // --- Existing add to bucket ---
+  // Add to bucket globally
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("add-btn")) {
-      const index = e.target.dataset.index;
-      const product = products[index];
+      const productId = parseInt(e.target.dataset.id);
+
+      // Search product in normalized data
+      let product = data.products.find((p) => p.id === productId);
+      if (!product) return;
 
       let bucket = JSON.parse(localStorage.getItem("bucket")) || [];
-      const existingItem = bucket.find((item) => item.id === index);
 
+      const existingItem = bucket.find((item) => item.id === product.id);
       if (existingItem) {
         existingItem.quantity++;
       } else {
         bucket.push({
-          id: index,
+          id: product.id,
           name: product.name,
           price: product.price,
+          img: product.img,
           quantity: 1,
         });
       }
 
       localStorage.setItem("bucket", JSON.stringify(bucket));
       updateBucketCount();
+      renderBucket();
     }
   });
 
-  // --- Initial render ---
   renderBucket();
   updateBucketCount();
 });
 
-// --- Existing renderBucket / deleteItem / updateBucketCount functions ---
+// Render bucket
 function renderBucket() {
   const bucket = JSON.parse(localStorage.getItem("bucket")) || [];
   const container = document.getElementById("bucket-items");
@@ -131,8 +65,8 @@ function renderBucket() {
   let total = 0;
 
   if (bucket.length === 0) {
-    container.innerHTML = `<p class="text-gray-400">Your bucket is empty</p>`;
-    totalPriceEl.textContent = "";
+    container.innerHTML = `<p class="text-gray-400 text-center">Your bucket is empty</p>`;
+    totalPriceEl.textContent = "0";
     return;
   }
 
@@ -140,17 +74,16 @@ function renderBucket() {
     total += item.price * item.quantity;
 
     container.innerHTML += `
-      <div class="bg-[#0090ff] border p-2 rounded flex justify-between items-center w-[70%]">
+      <div class="bg-[#0090ff] border p-2 rounded flex justify-between items-center w-[70%] mx-auto mb-2">
         <div>
           <h2 class="text-lg text-gray-100 font-semibold">${item.name}</h2>
           <p class="text-white">Rs. ${item.price} × ${item.quantity}</p>
         </div>
-        <button
-          class="h-[38px] w-[80px] bg-green-500 rounded-md text-white font-semibold hover:bg-red-600"
-          onclick="deleteItem(${index})"
-        >
-          Delete
-        </button>
+        <div class="flex gap-2">
+          <button class="px-2 py-1 bg-green-500 rounded text-white" onclick="changeQty(${index}, 'increase')">+</button>
+          <button class="px-2 py-1 bg-red-500 rounded text-white" onclick="changeQty(${index}, 'decrease')">-</button>
+          <button class="px-2 py-1 bg-gray-700 rounded text-white" onclick="deleteItem(${index})">Delete</button>
+        </div>
       </div>
     `;
   });
@@ -158,6 +91,23 @@ function renderBucket() {
   totalPriceEl.textContent = total;
 }
 
+// Change quantity
+function changeQty(index, action) {
+  const bucket = JSON.parse(localStorage.getItem("bucket")) || [];
+  if (action === "increase") {
+    bucket[index].quantity++;
+  } else {
+    bucket[index].quantity--;
+    if (bucket[index].quantity <= 0) {
+      bucket.splice(index, 1);
+    }
+  }
+  localStorage.setItem("bucket", JSON.stringify(bucket));
+  renderBucket();
+  updateBucketCount();
+}
+
+// Delete item
 function deleteItem(index) {
   const bucket = JSON.parse(localStorage.getItem("bucket")) || [];
   bucket.splice(index, 1);
@@ -166,8 +116,9 @@ function deleteItem(index) {
   updateBucketCount();
 }
 
+// Update bucket count (sum of quantities)
 function updateBucketCount() {
   const bucket = JSON.parse(localStorage.getItem("bucket")) || [];
-  const bucketCount = document.getElementById("bucketCount");
-  bucketCount.textContent = bucket.length;
+  const totalQty = bucket.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById("bucketCount").textContent = totalQty;
 }

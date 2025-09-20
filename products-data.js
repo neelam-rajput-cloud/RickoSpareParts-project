@@ -23,6 +23,42 @@ const data = {
           brand: "Hico",
           soldOut: true,
         },
+        {
+          id: 103,
+          name: "Drive X",
+          desc: "Best drive system",
+          img: "images/drive systems.jpg",
+          price: 12000,
+          brand: "Hico",
+          soldOut: false,
+        },
+        {
+          id: 104,
+          name: "Motor A",
+          desc: "High power motor",
+          img: "images/drive systems.jpg",
+          price: 5000,
+          brand: "Hico",
+          soldOut: false,
+        },
+        {
+          id: 105,
+          name: "Motor A",
+          desc: "High power motor",
+          img: "images/drive systems.jpg",
+          price: 5000,
+          brand: "Hico",
+          soldOut: false,
+        },
+        {
+          id: 106,
+          name: "Motor A",
+          desc: "High power motor",
+          img: "images/drive systems.jpg",
+          price: 5000,
+          brand: "Hico",
+          soldOut: false,
+        },
       ],
     },
     {
@@ -47,7 +83,7 @@ const data = {
       img: "images/drainage parts.jpg",
       products: [
         {
-          id: 101,
+          id: 301,
           name: "Motor A",
           desc: "High power motor",
           img: "images/drive systems.jpg",
@@ -56,7 +92,7 @@ const data = {
           soldOut: false,
         },
         {
-          id: 102,
+          id: 302,
           name: "Motor B",
           desc: "Low noise motor",
           img: "images/drive systems.jpg",
@@ -72,7 +108,7 @@ const data = {
       img: "images/drive systems.jpg",
       products: [
         {
-          id: 201,
+          id: 401,
           name: "Drive X",
           desc: "Best drive system",
           img: "images/drive systems.jpg",
@@ -88,7 +124,7 @@ const data = {
       img: "images/drive systems.jpg",
       products: [
         {
-          id: 101,
+          id: 501,
           name: "Motor A",
           desc: "High power motor",
           img: "images/drive systems.jpg",
@@ -97,7 +133,7 @@ const data = {
           soldOut: false,
         },
         {
-          id: 102,
+          id: 502,
           name: "Motor B",
           desc: "Low noise motor",
           img: "images/drive systems.jpg",
@@ -113,7 +149,7 @@ const data = {
       name: "Drive Systems",
       products: [
         {
-          id: 201,
+          id: 601,
           name: "Drive X",
           desc: "Best drive system",
           img: "images/drive systems.jpg",
@@ -125,5 +161,3 @@ const data = {
     },
   ],
 };
-
-

@@ -37,9 +37,9 @@ data.categories.forEach((cat, catIndex) => {
   cat.products.forEach((product, index) => {
     const card = document.createElement("div");
     card.className =
-      "border rounded-lg shadow-lg p-4 text-center hover:scale-105 transition";
+      "border rounded-lg shadow-lg p-4 text-center hover:scale-105 transition bg-white";
     card.innerHTML = `
-      <img src="${product.img}" alt="${product.name}" class="h-[150px] w-full object-cover rounded-lg">
+      <img src="${product.img}" alt="${product.name}" class="h-[150px] w-full object-contain rounded-lg">
       <h3 class="mt-4 text-lg font-semibold">${product.name}</h3>
       <p class="text-gray-600">${product.desc}</p>
       <p class="text-green-600 font-bold mt-2">PKR ${product.price}</p>
