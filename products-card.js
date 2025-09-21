@@ -1,6 +1,13 @@
+const params = new URLSearchParams(window.location.search);
+const categoryId = params.get("category");
 const productsContainer = document.getElementById("products");
 const categoryList = document.getElementById("category-list");
 const bucketCount = document.getElementById("bucketCount");
+
+const filterdProduct =categoryId!==""? products.filter(item => item.category_id == categoryId):products;
+console.log(categoryId);
+
+console.log(categories);
 
 let selectedProduct = null;
 let quantity = 1;
@@ -13,45 +20,49 @@ function updateBucketCount() {
   );
 }
 updateBucketCount();
+const isAllActive = !categoryId; 
+const liAll = document.createElement("li");
+liAll.innerHTML = `
+  <a href="products.html?category=" 
+     class="category-link block px-4 py-2 rounded-lg transition
+    ${isAllActive ? "bg-white text-black" : "hover:bg-white hover:text-black"}">
+    All Products
+  </a>
+`;
+categoryList.appendChild(liAll);
 
-data.categories.forEach((cat, catIndex) => {
+categories.forEach((cat) => {
+  const isActive = categoryId == cat.id; 
   const li = document.createElement("li");
   li.innerHTML = `
-    <a href="#category-${cat.id}" 
-      class="category-link block px-4 py-2 rounded-lg hover:bg-white hover:text-black transition">
+    <a href="products.html?category=${cat.id}" 
+       class="category-link block px-4 py-2 rounded-lg transition
+      ${isActive ? "bg-white text-black" : "hover:bg-white hover:text-black"}">
       ${cat.name}
     </a>
   `;
   categoryList.appendChild(li);
-
-  const section = document.createElement("div");
-  section.id = `category-${cat.id}`;
-  section.innerHTML = `
-    <h2 class="text-3xl font-bold mb-4">${cat.name}</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="cat-${cat.id}-products"></div>
-  `;
-  productsContainer.appendChild(section);
-
-  const productsDiv = document.getElementById(`cat-${cat.id}-products`);
-
-  cat.products.forEach((product, index) => {
-    const card = document.createElement("div");
-    card.className =
-      "border rounded-lg shadow-lg p-4 text-center hover:scale-105 transition bg-white";
-    card.innerHTML = `
-      <img src="${product.img}" alt="${product.name}" class="h-[150px] w-full object-contain rounded-lg">
-      <h3 class="mt-4 text-lg font-semibold">${product.name}</h3>
-      <p class="text-gray-600">${product.desc}</p>
-      <p class="text-green-600 font-bold mt-2">PKR ${product.price}</p>
-      <button 
-        class="details-btn mt-4 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
-        data-cat="${catIndex}" data-index="${index}">
-        Details
-      </button>
-    `;
-    productsDiv.appendChild(card);
-  });
 });
+
+// ✅ Products render 
+filterdProduct.forEach((product, index) => {
+  const card = document.createElement("div");
+  card.className =
+    "border rounded-lg shadow-lg p-4 text-center hover:scale-105 transition bg-white";
+  card.innerHTML = `
+    <img src="${product.img}" alt="${product.name}" class="h-[150px] w-full object-contain rounded-lg">
+    <h3 class="mt-4 text-lg font-semibold">${product.name}</h3>
+    <p class="text-gray-600">${product.desc}</p>
+    <p class="text-green-600 font-bold mt-2">PKR ${product.price}</p>
+    <button 
+      class="details-btn mt-4 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+      data-id="${product.id}">
+      Details
+    </button>
+  `;
+  productsContainer.appendChild(card);
+});
+
 
 // Modal references
 const productModal = document.getElementById("productModal");
@@ -70,10 +81,12 @@ const addToBucketBtn = document.getElementById("addToBucket");
 document.addEventListener("click", (e) => {
   if (e.target.closest(".details-btn")) {
     const btn = e.target.closest(".details-btn");
-    const catIndex = btn.dataset.cat;
-    const productIndex = btn.dataset.index;
+    const productId = btn.dataset.id;
 
-    selectedProduct = data.categories[catIndex].products[productIndex];
+    
+    selectedProduct = products.find((p) => p.id == productId);
+
+    if (!selectedProduct) return;
 
     quantity = 1;
     quantityEl.textContent = quantity;

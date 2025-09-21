@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="style.css" rel="stylesheet" />
-    <title>Vite App</title>
+    <title>Hico Spare Parts</title>
   </head>
   <style>
     html {
@@ -25,115 +25,66 @@
       </div>
     </a>
     <header>
-      <div class="w-full bg-white py-3 border-b">
-        <div class="flex justify-between max-w-8xl mx-auto px-6 items-center">
-          <div class="flex items-center space-x-2">
-            <span class="text-2xl font-bold text-blue-600"
-              >Hico Spare Parts</span
-            >
-          </div>
+      <div
+        class="flex justify-between items-center px-3 md:px-10 py-2 bg-white"
+      >
+        <a href="index.html" class="flex items-center">
+          <span class="text-2xl font-bold text-blue-600"
+            >Hico Spare Parts
+          </span>
+        </a>
 
-          <!-- <form class="w-[500px]">
-            <label
-              for="default-search"
-              class="mb-2 text-sm font-medium text-gray-900 sr-only"
-              >Search</label
-            >
-            <div class="relative">
-              <div
-                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-              >
+        <!-- <div class="flex items-center space-x-8 text-gray-700 w-[250px]"> -->
+        <!-- <div class="text-center">
+              <p class="font-bold">0000 -1234 56789</p>
+              <p class="text-sm">info@example.com</p>
+            </div> -->
+
+        <!-- <div class="space-x-6"> -->
+        <!-- <button>
                 <img
-                  src="svg/search.svg"
+                  src="svg/user.svg"
                   class="w-4 h-4 text-gray-500"
                   alt="search"
                 />
-              </div>
-              <input
-                type="search"
-                id="default-search"
-                class="w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Search..."
-                required
-              />
-              <button
-                type="submit"
-                class="text-white absolute end-2.5 bottom-2 w-18 h-10 bg-[#0090ff] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
-              >
-                Search
-              </button>
-            </div>
-          </form> -->
-
-          <div
-            class="flex items-center justify-center space-x-8 text-gray-700 w-[310px]"
-          >
-            <div class="text-center">
-              <p class="font-bold">0000 -1234 56789</p>
-              <p class="text-sm">info@example.com</p>
-            </div>
-
-            <div class="space-x-6">
-              <!-- <button>
-                <img
-                  src="svg/user.svg"
-                  class="w-6 h-6 text-gray-500"
-                  alt="search"
-                />
               </button> -->
-              <button id="bucketBtn" class="relative">
-                <img src="svg/cart.svg" class="w-6 h-6" alt="cart" />
-                <span
-                  id="bucketCount"
-                  class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
-                >
-                  0
-                </span>
+        <button id="bucketBtn" class="relative">
+          <img src="svg/cart.svg" class="w-6 h-6" alt="cart" />
+
+          <span
+            id="bucketCount"
+            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
+          >
+            0
+          </span>
+        </button>
+
+        <!-- Modal Overlay -->
+        <div
+          id="bucketModal"
+          class="fixed inset-0 bg-black bg-opacity-40 hidden z-[99999999] flex justify-center items-center"
+        >
+          <div
+            class="bg-white w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%] max-h-[80vh] rounded-2xl shadow-lg overflow-hidden flex flex-col"
+          >
+            <div
+              class="flex justify-between items-center bg-[#0090ff] text-white px-5 py-3"
+            >
+              <h2 class="text-lg font-semibold">Your Bucket</h2>
+              <button id="closeBucket" class="text-xl hover:text-gray-200">
+                &times;
               </button>
+            </div>
 
-              <!-- Modal Overlay -->
-              <div
-                id="bucketModal"
-                class="fixed inset-0 bg-gray-300 bg-opacity-40 hidden items-center justify-center z-50"
+            <div
+              id="bucket-items"
+              class="p-4 overflow-y-auto flex flex-col gap-3 max-h-[50vh]"
+            ></div>
+
+            <div class="flex justify-between items-center px-5 py-3 border-t">
+              <span class="text-lg font-bold"
+                >Total: <span id="total-price">0</span> PKR</span
               >
-                <div
-                  class="bg-white w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%] max-h-[80vh] rounded-2xl shadow-lg overflow-hidden flex flex-col"
-                >
-                  <!-- Header -->
-                  <div
-                    class="flex justify-between items-center bg-[#0090ff] text-white px-5 py-3"
-                  >
-                    <h2 class="text-lg font-semibold">Your Bucket</h2>
-                    <button
-                      id="closeBucket"
-                      class="text-xl hover:text-gray-200"
-                    >
-                      &times;
-                    </button>
-                  </div>
-
-                  <!-- Bucket Items -->
-                  <div
-                    id="bucket-items"
-                    class="p-4 overflow-y-auto flex flex-col gap-3 max-h-[50vh]"
-                  ></div>
-
-                  <!-- Total + Checkout -->
-                  <div
-                    class="flex justify-between items-center px-5 py-3 border-t"
-                  >
-                    <span class="text-lg font-bold">
-                      Total: <span id="total-price">0</span> PKR
-                    </span>
-                    <button
-                      id="checkoutBtn"
-                      class="m-5 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                    >
-                      Checkout
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -144,7 +95,9 @@
           <ul class="text-white font-semibold flex items-center space-x-14">
             <li><a href="#home" class="hover:text-gray-700">Home</a></li>
             <li>
-              <a href="#products" class="hover:text-gray-700">Products</a>
+              <a href="products.html?category=" class="hover:text-gray-700"
+                >Products</a
+              >
             </li>
             <li>
               <a href="#category" class="hover:text-gray-700">Category</a>
@@ -248,7 +201,7 @@
               deserves."</i
             >
           </p>
-          <a href="products-index.html">
+          <a href="products.html">
             <button class="h-12 w-36 bg-[#0090ff] font-semibold text-white">
               Shop Now
             </button></a
@@ -256,7 +209,7 @@
         </div>
       </div>
     </section>
-
+    <!-- category section start -->
     <section id="category" class="h-auto">
       <div class="h-[300px] flex flex-col justify-center items-center">
         <h1 class="text-black font-semibold text-5xl pt-12">
@@ -273,7 +226,9 @@
         class="flex flex-row flex-wrap gap-6 justify-center items-center"
       ></div>
     </section>
+    <!-- category section end -->
 
+    <!-- prodcut sectiion start -->
     <section id="products">
       <div class="h-[250px] flex flex-col justify-center items-center">
         <h1 class="text-black font-semibold text-5xl pt-12">Our Products</h1>
@@ -289,7 +244,7 @@
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
         ></div>
         <div class="h-[250px] flex justify-center items-center">
-          <a href="products-index.html">
+          <a href="products.html">
             <button
               class="h-16 w-48 bg-black font-bold text-lg text-white rounded-lg shadow-md hover:bg-[#0090ff] transition"
             >
@@ -299,6 +254,7 @@
         </div>
       </div>
     </section>
+    <!-- prodcut sectiion end -->
 
     <!-- product Modal -->
     <div
@@ -608,7 +564,8 @@
       </div>
     </footer>
 
-    <script src="products-data.js"></script>
+    <!-- <script src="products-data.js"></script> -->
+    <script src="data.js"></script>
     <script src="bucket.js"></script>
     <script src="category-card.js"></script>
     <script src="products-card.js"></script>
@@ -624,16 +581,21 @@
 
     <!-- products section cards -->
     <script>
+      // const products = data.categories[0].products;
       document.addEventListener("DOMContentLoaded", () => {
         // ✅ First category ka data lo
-        const products = data.categories[0].products;
+        const featureProduct = products.filter(
+          (item) => item.is_feature === true
+        );
+
+        console.log(featureProduct);
 
         const container = document.getElementById("productContainer");
         let selectedProduct = null;
         let quantity = 1;
 
         // ✅ Cards create karna
-        products.forEach((product, index) => {
+        featureProduct.forEach((product, index) => {
           const card = document.createElement("div");
           card.className =
             "bg-white rounded-2xl shadow-md p-4 relative hover:scale-105 transition duration-300 h-[400px] w-[250px]";

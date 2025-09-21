@@ -1,8 +1,8 @@
 const categoryContainer = document.getElementById("categoryContainer");
 
-data.categories.forEach((cat) => {
+categories.forEach((cat) => {
   const card = document.createElement("a");
-  card.href = `products-index.html#category-${cat.id}`;
+card.href = `products.html?category=${cat.id}`;
 
   card.innerHTML = `
       <div class="h-[300px] w-[210px] text-center hover:scale-105 transition duration-300">

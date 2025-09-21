@@ -74,10 +74,10 @@ function renderBucket() {
     total += item.price * item.quantity;
 
     container.innerHTML += `
-      <div class="bg-[#0090ff] border p-2 rounded flex justify-between items-center w-[70%] mx-auto mb-2">
+      <div class="  border-b p-2  flex justify-between items-center w-full mx-auto mb-2 last:border-b-0">
         <div>
-          <h2 class="text-lg text-gray-100 font-semibold">${item.name}</h2>
-          <p class="text-white">Rs. ${item.price} × ${item.quantity}</p>
+          <h2 class="text-lg text-gray-600 font-semibold">${item.name}</h2>
+          <p class="text-black">Rs. ${item.price} × ${item.quantity}</p>
         </div>
         <div class="flex gap-2">
           <button class="px-2 py-1 bg-green-500 rounded text-white" onclick="changeQty(${index}, 'increase')">+</button>
