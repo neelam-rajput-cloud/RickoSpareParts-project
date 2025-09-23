@@ -16,11 +16,11 @@ function renderBucket() {
     total += item.price * item.quantity;
 
     const div = document.createElement("div");
-    div.className = "border-b pb-2 last:border-0 py-3";
+    div.className = "border-b  last:border-0 flex justify-between";
 
     div.innerHTML = `
       <div class="flex items-center gap-3">
-        <img src="${item.img}" alt="${item.name}" class="w-14 h-14 rounded border object-cover" />
+        <img src="${item.img}" alt="${item.name}" class="w-14 h-14 object-contain" />
         <div>
           <p class="font-semibold text-gray-800">${item.name}</p>
           <p class="text-gray-600 text-sm">Rs.${item.price}</p>
@@ -28,16 +28,18 @@ function renderBucket() {
       </div>
 
       <div class="flex justify-end items-center gap-2 mt-2">
+            <button 
+          class="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+          onclick="changeQty(${index}, 'decrease')">-</button>
+        <span class="px-3 font-semibold text-center w-8">${item.quantity}</span>
+
         <button 
           class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
           onclick="changeQty(${index}, 'increase')">+</button>
-        <span class="px-3 font-semibold text-center w-8">${item.quantity}</span>
-        <button 
-          class="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
-          onclick="changeQty(${index}, 'decrease')">-</button>
+  
         <button 
           class="text-red-500 hover:text-red-700 text-xl ml-2"
-          onclick="deleteItem(${index})"><img src="svg/trash.svg" alt="trash" class="w-8 h-8"></button>
+          onclick="deleteItem(${index})"><img src="svg/trash.svg" alt="trash" class="w-8 h-8 min-w-8"></button>
       </div>
     `;
     container.appendChild(div);
@@ -77,9 +79,13 @@ function deleteItem(index) {
 // --- Update Count Badge ---
 function updateBucketCount() {
   const bucket = JSON.parse(localStorage.getItem("bucket")) || [];
-  const totalQty = bucket.reduce((sum, item) => sum + item.quantity, 0);
+  // const totalQty = bucket.reduce((sum, item) => sum + item.quantity, 0);
+  const bucketQuantity = bucket.length;
+
+  console.log(bucketQuantity,"ghjklkjhgfdghjkl");
+  
   const el = document.getElementById("bucketCount");
-  if (el) el.textContent = totalQty;
+  if (el) el.textContent = bucketQuantity;
 }
 
 // --- Modal Controls ---
