@@ -16,105 +16,227 @@
     <a href="#">
       <div
         id="home"
-        class="fixed z-50 bg-[#0090ff] h-16 w-16 rounded-full bottom-8 right-8 flex justify-center items-center border border-4 border-white"
+        class="fixed z-50 bg-[#0090ff] lg:h-16 lg:w-16 md:h-16 md:w-16 rounded-full bottom-8 right-8 flex justify-center items-center border border-4 border-white"
       >
         <img src="svg/arrow-up.svg" class="w-8 h-8" alt="arrow up" />
       </div>
     </a>
 
-    <header id="top" class="fixed top-0 left-0 w-full bg-white z-[99999999]">
-      <div class="flex justify-between items-center px-3 md:px-10 py-2">
-        <a href="index.html" class="flex items-center">
-          <span class="text-2xl font-bold text-blue-600"
-            >Hico Spare Parts
-          </span>
-        </a>
+    <header>
+      <nav class="bg-[#0090ff] px-2 py-4 fixed w-full z-50">
+        <div class="max-w-screen-xl flex items-center justify-between mx-auto">
+          <!-- Logo -->
+          <a href="index.html" class="flex items-center space-x-3">
+            <span class="self-center text-2xl font-bold text-white">
+              Hico Spare Parts
+            </span>
+          </a>
 
-        <!-- <div class="flex items-center space-x-8 text-gray-700 w-[250px]"> -->
-        <!-- <div class="text-center">
-              <p class="font-bold">0000 -1234 56789</p>
-              <p class="text-sm">info@example.com</p>
-            </div> -->
-
-        <!-- <div class="space-x-6"> -->
-        <!-- <button>
-                <img
-                  src="svg/user.svg"
-                  class="w-4 h-4 text-gray-500"
-                  alt="search"
-                />
-              </button> -->
-        <button id="bucketBtn" class="relative">
-          <img src="svg/cart.svg" class="w-6 h-6" alt="cart" />
-
-          <span
-            id="bucketCount"
-            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
+          <!-- Desktop Nav (LG only) -->
+          <ul
+            class="hidden lg:flex text-white font-semibold items-center space-x-14"
           >
-            0
-          </span>
-        </button>
-
-        <!-- Modal Overlay -->
-        <div
-          id="bucketModal"
-          class="fixed inset-0 bg-black bg-opacity-40 hidden z-[99999999] flex justify-center items-center"
-        >
-          <div
-            class="bg-white w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%] max-h-[80vh] rounded-2xl shadow-lg overflow-hidden flex flex-col"
-          >
-            <div
-              class="flex justify-between items-center bg-[#0090ff] text-white px-5 py-3"
-            >
-              <h2 class="text-lg font-semibold">Your Bucket</h2>
-              <button id="closeBucket" class="text-xl hover:text-gray-200">
-                &times;
-              </button>
-            </div>
-
-            <div
-              id="bucket-items"
-              class="p-4 overflow-y-auto flex flex-col gap-3 max-h-[50vh]"
-            ></div>
-
-            <div class="flex justify-between items-center px-5 py-3 border-t">
-              <span class="text-lg font-bold"
-                >Total: <span id="total-price">0</span> PKR</span
+            <li>
+              <a href="index.html" class="hover:text-gray-200">Home</a>
+            </li>
+            <li>
+              <a href="products.html?category=" class="hover:text-gray-200"
+                >Products</a
               >
-            </div>
+            </li>
+            <li>
+              <a href="index.html#category" class="hover:text-gray-200"
+                >Category</a
+              >
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+                onclick="openaboutModal('aboutModal')"
+                class="hover:text-gray-200"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="index.html#contact" class="hover:text-gray-200"
+                >Contact Us</a
+              >
+            </li>
+          </ul>
+
+          <!-- Right Side (Bucket + Hamburger) -->
+          <div class="flex items-center gap-4">
+            <!-- Bucket (Always visible) -->
+            <button id="bucketBtn" class="relative">
+              <img src="svg/carts.svg" class="w-6 h-6" alt="cart" />
+              <span
+                id="bucketCount"
+                class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
+                >0</span
+              >
+            </button>
+
+            <!-- Hamburger (sm, md only) -->
+            <button
+              id="menuToggle"
+              type="button"
+              class="lg:hidden items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            >
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
           </div>
         </div>
-      </div>
+
+        <!-- Overlay Menu (small screens only) -->
+        <div
+          id="mobileMenu"
+          class="fixed inset-0 bg-[#0090ff] bg-opacity-95 hidden flex-col items-center justify-center space-y-6 text-white font-semibold z-50 lg:hidden"
+        >
+          <button
+            id="closeMenu"
+            class="absolute top-4 right-4 text-white text-3xl"
+          >
+            ✕
+          </button>
+
+          <a href="index.html" class="block text-xl hover:text-gray-200"
+            >Home</a
+          >
+          <a
+            href="products.html?category="
+            class="block text-xl hover:text-gray-200"
+            >Products</a
+          >
+          <a
+            href="index.html#category"
+            class="block text-xl hover:text-gray-200"
+            >Category</a
+          >
+          <a
+            href="javascript:void(0)"
+            onclick="openaboutModal('aboutModal')"
+            class="block text-xl hover:text-gray-200"
+            >About</a
+          >
+          <a href="index.html#contact" class="block text-xl hover:text-gray-200"
+            >Contact Us</a
+          >
+        </div>
+      </nav>
     </header>
-
-    <!-- <a href="index.html">
-      <div
-        id="top"
-        class="fixed z-50 bg-[#0090ff] h-10 w-10 rounded-full top-24 left-4 flex justify-center items-center border-4 border-white"
-      >
-        <img src="svg/arrow-left.svg" class="w-8 h-8" alt="arrow left" />
-      </div>
-    </a> -->
-
-    <aside
-      class="w-64 fixed top-12 h-screen bg-[#0090ff] text-white left-0 overflow-y-auto shadow-lg"
+    <!-- bucket modal -->
+    <div
+      id="bucketModal"
+      class="fixed inset-0 bg-black bg-opacity-40 hidden z-[99999999] flex justify-center items-center"
     >
-      <!-- <div class="p-6 border-b border-gray-700">
-        <h2 class="text-xl pl-12 font-bold">Categories</h2>
-      </div> -->
+      <div
+        class="bg-white w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%] max-h-[80vh] rounded-2xl shadow-lg overflow-hidden flex flex-col"
+      >
+        <div
+          class="flex justify-between items-center bg-[#0090ff] text-white px-5 py-3"
+        >
+          <h2 class="text-lg font-semibold">Your Bucket</h2>
+          <button id="closeBucket" class="text-xl hover:text-gray-200">
+            &times;
+          </button>
+        </div>
+
+        <div
+          id="bucket-items"
+          class="p-4 overflow-y-auto flex flex-col gap-3 max-h-[50vh]"
+        ></div>
+
+        <div class="flex justify-between items-center px-5 py-3 border-t">
+          <span class="text-lg font-bold"
+            >Total: <span id="total-price">0</span> PKR</span
+          >
+          <button
+            id="checkoutBtn"
+            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            class="m-5 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- About Modal -->
+    <div
+      id="aboutModal"
+      class="hidden fixed inset-0 z-50 flex justify-center items-center bg-black/50 p-4"
+    >
+      <!-- Inner box -->
+      <div
+        class="bg-[#0090ff] p-6 rounded-lg w-2/3 max-w-4xl h-auto text-center flex flex-col lg:flex-row justify-center items-center gap-6"
+      >
+        <!-- Image Section -->
+        <div class="w-full lg:w-[60%]">
+          <img
+            src="images/about-image.webp"
+            alt="About"
+            class="w-full h-auto rounded-lg object-cover"
+          />
+        </div>
+        <!-- Text Section -->
+        <div class="w-full lg:w-[40%] text-white">
+          <h2 class="text-2xl font-bold mb-4">About Us</h2>
+          <p class="mb-4">
+            Welcome to Hico Spare parts, your trusted destination for
+            high-quality washing machine spare parts. We specialize in providing
+            durable, reliable, and affordable components...
+          </p>
+          <button
+            onclick="closeaboutModal('aboutModal')"
+            class="mt-4 px-4 py-2 bg-white text-black rounded hover:bg-gray-500 hover:text-white"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside
+      id="sidebar"
+      class="fixed top-16 pt-6 left-0 h-screen w-64 bg-[#0090ff] text-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 overflow-y-auto z-40"
+    >
       <ul id="category-list" class="p-4 space-y-2"></ul>
     </aside>
 
-    <main class="ml-64 p-8 flex-1 mt-16">
-      <!-- <h1 id="all-products" class="text-5xl font-bold mb-6 mt-24 text-center">
-        All Products
-      </h1> -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden z-30 lg:hidden"
+    ></div>
 
+    <!-- Main -->
+    <main class="p-8 flex-1 pt-24 lg:ml-64">
       <section
         id="products"
         class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
       ></section>
     </main>
+
+    <!-- Toggle Button -->
+    <button
+      id="sidebarToggle"
+      class="fixed top-16 left-4 bg-[#0090ff] text-white p-2 rounded lg:hidden z-50"
+    >
+      ☰
+    </button>
 
     <div
       id="productModal"
@@ -188,9 +310,74 @@
       });
     </script>
 
-    <!-- <script src="products-data.js"></script> -->
+    <script>
+      const checkoutBtn = document.getElementById("checkoutBtn");
+
+      checkoutBtn.addEventListener("click", () => {
+        const bucket = JSON.parse(localStorage.getItem("bucket")) || [];
+        if (bucket.length === 0) {
+          alert("Your bucket is empty!");
+          return;
+        }
+        // Go to checkout page
+        window.location.href = "checkout.html";
+      });
+    </script>
+
     <script src="data.js"></script>
     <script src="bucket.js"></script>
     <script src="products-card.js"></script>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const closeMenu = document.getElementById("closeMenu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.classList.add("flex");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.classList.remove("flex");
+      });
+    </script>
+
+    <script>
+      function openaboutModal(id) {
+        document.getElementById(id).classList.remove("hidden");
+      }
+      function closeaboutModal(id) {
+        document.getElementById(id).classList.add("hidden");
+      }
+    </script>
+
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const toggleBtn = document.getElementById("sidebarToggle");
+      const overlay = document.getElementById("overlay");
+
+      function openSidebar() {
+        sidebar.classList.remove("-translate-x-full");
+        overlay.classList.remove("hidden"); // overlay show
+        toggleBtn.classList.remove("z-50");
+        toggleBtn.classList.add("z-30"); // button peeche
+      }
+
+      function closeSidebar() {
+        sidebar.classList.add("-translate-x-full");
+        overlay.classList.add("hidden"); // overlay hide
+        toggleBtn.classList.add("z-50");
+        toggleBtn.classList.remove("z-30"); // button upar
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        const isOpen = !sidebar.classList.contains("-translate-x-full");
+        isOpen ? closeSidebar() : openSidebar();
+      });
+
+      overlay.addEventListener("click", closeSidebar); // screen click se close
+    </script>
   </body>
 </html>

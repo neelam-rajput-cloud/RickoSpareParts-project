@@ -4,7 +4,10 @@ const productsContainer = document.getElementById("products");
 const categoryList = document.getElementById("category-list");
 const bucketCount = document.getElementById("bucketCount");
 
-const filterdProduct =categoryId!==""? products.filter(item => item.category_id == categoryId):products;
+const filterdProduct =
+  categoryId !== ""
+    ? products.filter((item) => item.category_id == categoryId)
+    : products;
 console.log(categoryId);
 
 console.log(categories);
@@ -20,7 +23,7 @@ function updateBucketCount() {
   );
 }
 updateBucketCount();
-const isAllActive = !categoryId; 
+const isAllActive = !categoryId;
 const liAll = document.createElement("li");
 liAll.innerHTML = `
   <a href="products.html?category=" 
@@ -32,7 +35,7 @@ liAll.innerHTML = `
 categoryList.appendChild(liAll);
 
 categories.forEach((cat) => {
-  const isActive = categoryId == cat.id; 
+  const isActive = categoryId == cat.id;
   const li = document.createElement("li");
   li.innerHTML = `
     <a href="products.html?category=${cat.id}" 
@@ -44,7 +47,7 @@ categories.forEach((cat) => {
   categoryList.appendChild(li);
 });
 
-// ✅ Products render 
+// ✅ Products render
 filterdProduct.forEach((product, index) => {
   const card = document.createElement("div");
   card.className =
@@ -62,7 +65,6 @@ filterdProduct.forEach((product, index) => {
   `;
   productsContainer.appendChild(card);
 });
-
 
 // Modal references
 const productModal = document.getElementById("productModal");
@@ -83,7 +85,6 @@ document.addEventListener("click", (e) => {
     const btn = e.target.closest(".details-btn");
     const productId = btn.dataset.id;
 
-    
     selectedProduct = products.find((p) => p.id == productId);
 
     if (!selectedProduct) return;

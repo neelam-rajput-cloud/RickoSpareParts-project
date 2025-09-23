@@ -10,7 +10,7 @@ const categories = [
 const products = [
   {
     id: 101,
-    name: "Motor A",
+    name: "Motor A Moter moter moter moter moter moter moter moter moter ",
     desc: "High power motor",
     img: "images/drive systems.jpg",
     price: 5000,

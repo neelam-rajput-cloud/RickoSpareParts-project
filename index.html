@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,135 +19,185 @@
     <a href="#">
       <div
         id="home"
-        class="fixed z-50 bg-[#0090ff] h-16 w-16 rounded-full bottom-8 right-8 flex justify-center items-center border border-4 border-white"
+        class="fixed z-50 bg-[#0090ff] lg:h-16 lg:w-16 md:h-16 md:w-16 rounded-full bottom-8 right-8 flex justify-center items-center border border-4 border-white"
       >
         <img src="svg/arrow-up.svg" class="w-8 h-8" alt="arrow up" />
       </div>
     </a>
     <header>
-      <div
-        class="flex justify-between items-center px-3 md:px-10 py-2 bg-white"
-      >
-        <a href="index.html" class="flex items-center">
-          <span class="text-2xl font-bold text-blue-600"
-            >Hico Spare Parts
-          </span>
-        </a>
+      <nav class="bg-[#0090ff] px-2 py-4 fixed w-full z-50">
+        <div class="max-w-screen-xl flex items-center justify-between mx-auto">
+          <!-- Logo -->
+          <a href="index.html" class="flex items-center space-x-3">
+            <span class="self-center text-2xl font-bold text-white">
+              Hico Spare Parts
+            </span>
+          </a>
 
-        <!-- <div class="flex items-center space-x-8 text-gray-700 w-[250px]"> -->
-        <!-- <div class="text-center">
-              <p class="font-bold">0000 -1234 56789</p>
-              <p class="text-sm">info@example.com</p>
-            </div> -->
-
-        <!-- <div class="space-x-6"> -->
-        <!-- <button>
-                <img
-                  src="svg/user.svg"
-                  class="w-4 h-4 text-gray-500"
-                  alt="search"
-                />
-              </button> -->
-        <button id="bucketBtn" class="relative">
-          <img src="svg/cart.svg" class="w-6 h-6" alt="cart" />
-
-          <span
-            id="bucketCount"
-            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
+          <!-- Desktop Nav (LG only) -->
+          <ul
+            class="hidden lg:flex text-white font-semibold items-center space-x-14"
           >
-            0
-          </span>
-        </button>
-
-        <!-- Modal Overlay -->
-        <div
-          id="bucketModal"
-          class="fixed inset-0 bg-black bg-opacity-40 hidden z-[99999999] flex justify-center items-center"
-        >
-          <div
-            class="bg-white w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%] max-h-[80vh] rounded-2xl shadow-lg overflow-hidden flex flex-col"
-          >
-            <div
-              class="flex justify-between items-center bg-[#0090ff] text-white px-5 py-3"
-            >
-              <h2 class="text-lg font-semibold">Your Bucket</h2>
-              <button id="closeBucket" class="text-xl hover:text-gray-200">
-                &times;
-              </button>
-            </div>
-
-            <div
-              id="bucket-items"
-              class="p-4 overflow-y-auto flex flex-col gap-3 max-h-[50vh]"
-            ></div>
-
-            <div class="flex justify-between items-center px-5 py-3 border-t">
-              <span class="text-lg font-bold"
-                >Total: <span id="total-price">0</span> PKR</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Nav bar -->
-      <nav class="h-14 bg-[#0090ff] flex justify-center">
-        <div class="w-[90%] max-w-8xl h-full flex justify-between">
-          <ul class="text-white font-semibold flex items-center space-x-14">
-            <li><a href="#home" class="hover:text-gray-700">Home</a></li>
             <li>
-              <a href="products.html?category=" class="hover:text-gray-700"
+              <a href="index.html" class="hover:text-gray-200">Home</a>
+            </li>
+            <li>
+              <a href="products.html?category=" class="hover:text-gray-200"
                 >Products</a
               >
             </li>
             <li>
-              <a href="#category" class="hover:text-gray-700">Category</a>
+              <a href="index.html#category" class="hover:text-gray-200"
+                >Category</a
+              >
             </li>
-
-            <!-- About link will open modal -->
             <li>
               <a
                 href="javascript:void(0)"
                 onclick="openaboutModal('aboutModal')"
-                class="hover:text-gray-700"
+                class="hover:text-gray-200"
                 >About</a
               >
             </li>
-
             <li>
-              <a href="#contact" class="hover:text-gray-700">Contact Us</a>
+              <a href="index.html#contact" class="hover:text-gray-200"
+                >Contact Us</a
+              >
             </li>
           </ul>
 
-          <div class="flex justify-center items-center gap-4">
-            <a href="https://www.instagram.com/" class="block">
-              <img src="svg/instagram.svg" class="w-6 h-6" alt="instagram" />
-            </a>
-            <a href="https://www.facebook.com/">
-              <img src="svg/facebook.svg" class="w-6 h-6" alt="facebook" />
-            </a>
-            <a href="https://www.twitter.com/">
-              <img src="svg/twitter.svg" class="w-6 h-6" alt="twitter" />
-            </a>
-            <a href="https://www.youtube.com/">
-              <img src="svg/youtube.svg" class="w-6 h-6" alt="youtube" />
-            </a>
+          <!-- Right Side (Bucket + Hamburger) -->
+          <div class="flex items-center gap-4">
+            <!-- Bucket (Always visible) -->
+            <button id="bucketBtn" class="relative">
+              <img src="svg/carts.svg" class="w-6 h-6" alt="cart" />
+              <span
+                id="bucketCount"
+                class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
+                >0</span
+              >
+            </button>
+
+            <!-- Hamburger (sm, md only) -->
+            <button
+              id="menuToggle"
+              type="button"
+              class="lg:hidden items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            >
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
           </div>
+        </div>
+
+        <!-- Overlay Menu (small screens only) -->
+        <div
+          id="mobileMenu"
+          class="fixed inset-0 bg-[#0090ff] bg-opacity-95 hidden flex-col items-center justify-center space-y-6 text-white font-semibold z-50 lg:hidden"
+        >
+          <button
+            id="closeMenu"
+            class="absolute top-4 right-4 text-white text-3xl"
+          >
+            ✕
+          </button>
+
+          <a href="index.html" class="block text-xl hover:text-gray-200"
+            >Home</a
+          >
+          <a
+            href="products.html?category="
+            class="block text-xl hover:text-gray-200"
+            >Products</a
+          >
+          <a
+            href="index.html#category"
+            class="block text-xl hover:text-gray-200"
+            >Category</a
+          >
+          <a
+            href="javascript:void(0)"
+            onclick="openaboutModal('aboutModal')"
+            class="block text-xl hover:text-gray-200"
+            >About</a
+          >
+          <a href="index.html#contact" class="block text-xl hover:text-gray-200"
+            >Contact Us</a
+          >
         </div>
       </nav>
     </header>
+
+    <div
+      id="bucketModal"
+      class="fixed inset-0 bg-black bg-opacity-40 hidden z-[99999999] flex justify-center items-center"
+    >
+      <div
+        class="bg-white w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%] max-h-[80vh] rounded-2xl shadow-lg overflow-hidden flex flex-col"
+      >
+        <div
+          class="flex justify-between items-center bg-[#0090ff] text-white px-5 py-3"
+        >
+          <h2 class="text-lg font-semibold">Your Bucket</h2>
+          <button id="closeBucket" class="text-xl hover:text-gray-200">
+            &times;
+          </button>
+        </div>
+
+        <div
+          id="bucket-items"
+          class="p-4 overflow-y-auto flex flex-col gap-3 max-h-[50vh]"
+        ></div>
+
+        <div class="flex justify-between items-center px-5 py-3 border-t">
+          <span class="text-lg font-bold"
+            >Total: <span id="total-price">0</span> PKR</span
+          >
+          <button
+            id="checkoutBtn"
+            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            class="m-5 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- About Modal -->
     <div
       id="aboutModal"
-      class="hidden fixed inset-0 z-50 flex justify-center items-center bg-black/50"
+      class="hidden fixed inset-0 z-50 flex justify-center items-center bg-black/50 p-4"
     >
       <!-- Inner box -->
       <div
-        class="bg-[#0090ff] p-8 rounded-lg w-[70%] h-[500px] text-center flex justify-center gap-10"
+        class="bg-[#0090ff] p-6 rounded-lg w-2/3 max-w-4xl h-auto text-center flex flex-col lg:flex-row justify-center items-center gap-6"
       >
+        <!-- Image Section -->
+        <div class="w-full lg:w-[60%]">
+          <img
+            src="images/about-image.webp"
+            alt="About"
+            class="w-full h-auto rounded-lg object-cover"
+          />
+        </div>
         <!-- Text Section -->
-        <div class="w-[35%]">
-          <h2 class="text-white text-2xl font-bold mb-4">About Us</h2>
-          <p class="mb-4 text-white">
+        <div class="w-full lg:w-[40%] text-white">
+          <h2 class="text-2xl font-bold mb-4">About Us</h2>
+          <p class="mb-4">
             Welcome to Hico Spare parts, your trusted destination for
             high-quality washing machine spare parts. We specialize in providing
             durable, reliable, and affordable components...
@@ -159,21 +209,12 @@
             Close
           </button>
         </div>
-
-        <!-- Image Section -->
-        <div class="h-full w-[60%]">
-          <img
-            src="images/about-image.webp"
-            alt="About"
-            class="h-full w-full"
-          />
-        </div>
       </div>
     </div>
 
-    <section class="pt-3">
+    <section class="pt-2">
       <div
-        class="h-[600px] max-w-8xl flex [clip-path:inset(0)] relative overflow-hidden"
+        class="lg:h-[750px] md:h-[750px] sm:h-[750px] h-[650px] max-w-8xl flex [clip-path:inset(0)] relative overflow-hidden lineclamp-2 flex justify-center items-center"
       >
         <img
           src="images/image-1.jpg"
@@ -181,27 +222,27 @@
           class="w-full h-full transition duration-300 ease-in-out brightness-50 object-cover hover:blur-sm"
         />
         <div
-          class="absolute gap-4 pt-[150px] w-full flex flex-col items-center"
+          class="absolute gap-4 lg:pt-[150px] flex flex-col items-center w-2/3 lg:w-3/5 md:w-3/5 sm:w-3/5 lg:bottom-44"
         >
           <span class="text-white font-small">Auto Parts Supplier </span>
-          <h1 class="text-white text-center font-bold text-5xl leading-[3rem]">
+          <h1
+            class="text-white text-center font-bold lg:text-5xl leading-[3rem] md:text-5xl sm:text-3xl text-3xl"
+          >
             We provide quality
             <span class="text-[#0090ff]">auto parts</span>
           </h1>
           <p
-            class="text-white leading-[2rem] pt-4 pb-4 text-lg font-semibold text-center"
+            class="text-white lg:leading-[2rem] pt-4 pb-4 lg:text-lg lg:font-semibold text-center md:text-lg md:font-semibold md:leading-[2rem]"
           >
             <i>
               "At <span class="text-[#0090ff]">Hico spare Parts</span>, we are
               committed to providing top-quality auto parts that keep your
-              <br />
               vehicle running smoothly and reliably. We believe in delivering
-              genuine spare parts at competitive prices, <br />
-              ensuring your vehicle gets the performance and care it
-              deserves."</i
+              genuine spare parts at competitive prices, ensuring your vehicle
+              gets the performance and care it deserves."</i
             >
           </p>
-          <a href="products.html">
+          <a href="products.html?category=">
             <button class="h-12 w-36 bg-[#0090ff] font-semibold text-white">
               Shop Now
             </button></a
@@ -211,11 +252,13 @@
     </section>
     <!-- category section start -->
     <section id="category" class="h-auto">
-      <div class="h-[300px] flex flex-col justify-center items-center">
-        <h1 class="text-black font-semibold text-5xl pt-12">
+      <div class="h-[300px] flex flex-col justify-center">
+        <h1
+          class="text-black font-semibold lg:text-5xl md:text-5xl text-3xl lg:pt-12 md:pt-12 text-center"
+        >
           Shop By Category
         </h1>
-        <h5 class="text-black text-lg pt-6">
+        <h5 class="text-black text-lg pt-6 text-center pl-6 pr-6">
           Choose from our best collections organized neatly into multiple
           product categories
         </h5>
@@ -223,7 +266,7 @@
 
       <div
         id="categoryContainer"
-        class="flex flex-row flex-wrap gap-6 justify-center items-center"
+        class="flex flex-row flex-wrap lg:gap-6 md:gap-6 gap-3 justify-center items-center"
       ></div>
     </section>
     <!-- category section end -->
@@ -231,8 +274,12 @@
     <!-- prodcut sectiion start -->
     <section id="products">
       <div class="h-[250px] flex flex-col justify-center items-center">
-        <h1 class="text-black font-semibold text-5xl pt-12">Our Products</h1>
-        <h5 class="text-black text-lg pt-6">
+        <h1
+          class="text-black font-semibold lg:text-5xl md:text-5xl text-3xl pt-12 pl-4 pr-4"
+        >
+          Our Products
+        </h1>
+        <h5 class="text-black text-lg pt-6 text-center pl-4 pr-4">
           Experience top-quality products built to provide durability, value,
           and satisfaction.
         </h5>
@@ -241,10 +288,10 @@
       <div class="flex justify-center items-center flex-col">
         <div
           id="productContainer"
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 flex-wrap"
         ></div>
         <div class="h-[250px] flex justify-center items-center">
-          <a href="products.html">
+          <a href="products.html?category=">
             <button
               class="h-16 w-48 bg-black font-bold text-lg text-white rounded-lg shadow-md hover:bg-[#0090ff] transition"
             >
@@ -297,7 +344,7 @@
 
     <section>
       <div
-        class="h-[400px] bg-white flex justify-center gap-6 items-center pt-6 pb-16"
+        class="lg:h-[400px] md:h-[400px] bg-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 place-items-center justify-items-center pt-12 pb-16"
       >
         <div class="h-[180px] w-[300px] flex flex-row gap-4 justify-center">
           <div class="pt-4">
@@ -375,13 +422,47 @@
       </div>
     </section>
 
+    <!-- <div class="bg-[#0090ff] p-8 grid grid-cols-2">
+      <div class="flex justify-center flex-col items-center p-4 text-center">
+        <div class="h-10 w-10">
+          <img src="svg/mail.svg" class="w-6 h-6" alt="mail" />
+        </div>
+        <div>
+          <p class="text-lg text-white">info@example.com</p>
+          <p class="text-lg text-white">support@example.com</p>
+        </div>
+      </div>
+      <div
+        class="flex-1 flex justify-center flex-col gap-5 items-center p-4 text-center"
+      >
+        <div class="h-10 w-10">
+          <img src="svg/phone.svg" class="w-6 h-6" alt="phone" />
+        </div>
+        <div>
+          <p class="text-lg text-white">00-123-456789</p>
+          <p class="text-lg text-white">000-123-456789</p>
+        </div>
+      </div>
+      <div
+        class="flex-1 flex justify-center flex-col gap-5 items-center p-4 text-center"
+      >
+        <div class="h-10 w-10">
+          <img src="svg/location.svg" class="w-6 h-6" alt="location" />
+        </div>
+        <p class="text-lg text-white">
+          No: 53 A, East Madison <br />
+          Street, Baltimore, USA
+        </p>
+      </div>
+    </div> -->
+
     <footer class="bg-black text-gray-300">
       <section
         id="contact"
-        class="flex justify-center items-center transform -translate-y-1/2"
+        class="flex justify-center items-center transform -translate-y-1/2 hidden lg:block"
       >
         <div
-          class="divide-x-2 max-w-7xl mx-auto divide-white w-[80%] h-[200px] bg-[#0090ff] flex justify-center items-center"
+          class="divide-x-2 max-w-7xl mx-auto divide-white w-[80%] lg:h-[200px] bg-[#0090ff] flex justify-center items-center flex-col lg:flex-row"
         >
           <div
             class="flex-1 flex justify-center flex-col gap-5 items-center p-4 text-center"
@@ -418,22 +499,19 @@
           </div>
         </div>
       </section>
-      <div class="max-w-8xl mx-auto flex justify-center px-20 pb-10">
-        <div class="flex flex-col gap-4 w-[450px]">
+      <div
+        class="max-w-8xl mx-auto flex justify-center items-center gap-10 lg:px-20 md:px-20 sm:px-20 lg:pb-10 px-8 pt-12 pb-6 flex-col lg:flex-row md:flex-row"
+      >
+        <div class="flex flex-col gap-4 lg:w-1/3">
           <div class="flex items-center">
-            <!-- <img src="logo.png" alt="Logo" class="h-10" /> -->
             <span class="text-2xl font-bold text-blue-500">CARTREK</span>
           </div>
           <p class="text-sm mb-4">
-            Your trusted destination for premium auto and home <br />
-            appliance spare parts. We bring you high-quality products from
-            <br />
-            top brands, ensuring durability, reliability, and performance.
-            <br />
-            With secure payments, easy returns, and fast free delivery, <br />
-            we make your shopping experience smooth and worry-free. <br />
-            Discover the perfect spare parts you need <br />
-            — all in one place.
+            Your trusted destination for premium auto and home appliance spare
+            parts. We bring you high-quality products from top brands, ensuring
+            durability, reliability, and performance. With secure payments, easy
+            returns, and fast free delivery, we make your shopping experience
+            smooth and worry-free.
           </p>
           <p class="text-sm mb-2">Follow us:</p>
           <div class="flex gap-4">
@@ -466,7 +544,9 @@
           </div>
         </div>
 
-        <div class="flex gap-32 w-[450px] pt-6">
+        <div
+          class="flex lg:gap-32 md:gap-32 sm:gap-44 gap-16 lg:w-[450px] pt-6"
+        >
           <div>
             <ul class="space-y-4">
               <li class="flex items-center gap-4">
@@ -496,17 +576,19 @@
             <ul class="space-y-4">
               <li class="flex items-center gap-4">
                 <span class="h-2 w-2 bg-blue-500 rounded-full"></span>
-                <a href="#" class="hover:text-blue-400">Privacy Policy</a>
+                <a href="#" class="hover:text-blue-400">Contact</a>
               </li>
               <li class="flex items-center gap-4">
                 <span class="h-2 w-2 bg-blue-500 rounded-full"></span>
-                <a href="#" class="hover:text-blue-400">Contact</a>
+                <a href="#" class="hover:text-blue-400">Privacy Policy</a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-2 w-[300px] h-[250px] pt-6">
+        <div
+          class="lg:grid lg:grid-cols-3 lg:gap-2 lg:w-[300px] lg:h-[250px] lg:pt-6 md:hidden sm:hidden lg:block hidden"
+        >
           <img
             src="images/Rectangle_2.jpg"
             alt=""
@@ -569,6 +651,8 @@
     <script src="bucket.js"></script>
     <script src="category-card.js"></script>
     <script src="products-card.js"></script>
+    <!-- Flowbite JS for toggle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
     <script>
       function openaboutModal(id) {
@@ -725,6 +809,22 @@
         }
         // Go to checkout page
         window.location.href = "checkout.html";
+      });
+    </script>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const closeMenu = document.getElementById("closeMenu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.classList.add("flex");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.classList.remove("flex");
       });
     </script>
   </body>
